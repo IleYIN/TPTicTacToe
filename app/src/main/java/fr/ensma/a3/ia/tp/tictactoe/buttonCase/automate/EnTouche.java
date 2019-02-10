@@ -11,13 +11,8 @@ public class EnTouche extends AbsEtatCase  {
     }
 
     @Override
-    public void touche() throws CaseNonPermisException {
-        //faire rien
-    }
-
-    @Override
     public void reset() throws CaseNonPermisException {
-        lemodel.setValChamp("");
+        lemodel.setValChamp("CLICK");
         monautomate.setEtatCourant(monautomate.getEnVide());
     }
 }

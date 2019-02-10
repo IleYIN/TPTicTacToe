@@ -19,7 +19,7 @@ import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.PlateauNonPermisException;
 public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase,IObservablePlateau {
 
     private List<PresentationCase> listPresCase;
-    List<IObserverOfPlateau> listIObserverOfP;
+    private List<IObserverOfPlateau> listIObserverOfP;
 
     private ModelPlateau lemodel;
     private IVuePlateau lavue;
@@ -32,7 +32,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         listPresCase = new ArrayList<PresentationCase>();
         listIObserverOfP = new ArrayList<IObserverOfPlateau>();
         lemodel = new ModelPlateau();
-        etatCourant = new EnJeu(this,lemodel);
+        etatCourant = new EnInit(this,lemodel);
         etatInit= new EnInit(this,lemodel);
         etatEnJeu = new EnJeu(this,lemodel);
     }
@@ -56,9 +56,6 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         } catch (PlateauNonPermisException e) {
             e.printStackTrace();
         }
-
-        //TODO
-//        lavue.notifiValeur(lemodel.getValChamp());
     }
 
 
@@ -93,7 +90,6 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     public void updateFromCase()  {
         try {
             etatCourant.jouer();
-            this.notifyObserver();
         } catch (PlateauNonPermisException e) {
             e.printStackTrace();
         }
@@ -112,7 +108,8 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     @Override
     public void notifyObserver() {
         for(IObserverOfPlateau iobr:listIObserverOfP){
-            iobr.updateFromPlateau();
+            PresentationCase pc = (PresentationCase)iobr;
+            pc.actionReset();
         }
     }
 }

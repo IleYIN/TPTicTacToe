@@ -47,9 +47,20 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
 
     public void actionTouche() {
         try {
+            //faire intention aux ordres des trois commandes suivantes!!!
             etatCourant.touche();
             lavue.notifiValeur(lemodel.getValChamp());
-            this.notifyObserver();
+            lavue.getLebutton().setEnabled(false);
+        } catch (CaseNonPermisException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void actionReset(){
+        try {
+            etatCourant.reset();
+            lavue.notifiValeur(lemodel.getValChamp());
+            lavue.getLebutton().setEnabled(true);
         } catch (CaseNonPermisException e) {
             e.printStackTrace();
         }
@@ -98,15 +109,16 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
     }
 
     @Override
-    public void updateFromPlateau() {
-        if(presPlateau.getEtatCourant().equals(presPlateau.getEnJeu())){
+    public String updateFromPlateau() {
+        this.notifyObserver();
+        if(!presPlateau.getLemodel().isReset()){
             if(presPlateau.getLemodel().isValChamp()){
-               lemodel.setValChamp("O");
+               return "O";
             } else {
-               lemodel.setValChamp("X");
+               return "X";
             }
         } else {
-            lemodel.setValChamp("");
+           return "";
         }
     }
 }

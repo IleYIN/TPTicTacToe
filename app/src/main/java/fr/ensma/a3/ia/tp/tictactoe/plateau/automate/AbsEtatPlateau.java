@@ -2,7 +2,7 @@ package fr.ensma.a3.ia.tp.tictactoe.plateau.automate;
 
 import fr.ensma.a3.ia.tp.tictactoe.plateau.ModelPlateau;
 
-public class AbsEtatPlateau implements IEtatPlateau {
+public abstract class AbsEtatPlateau implements IEtatPlateau {
 
     protected IGestionEtatPlateau monautomate;
     protected ModelPlateau lemodel;

@@ -12,6 +12,7 @@ public class EnJeu extends AbsEtatPlateau {
     @Override
     public void reset() throws PlateauNonPermisException {
         lemodel.setReset(true);
+        lemodel.setValChamp(false);
         monautomate.setEtatCourant(monautomate.getEnInit());
     }
 

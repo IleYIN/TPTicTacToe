@@ -4,23 +4,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.IEtatCase;
-import fr.ensma.a3.ia.tp.tictactoe.plateau.IObserverOfCase;
 
 public class CaseVue implements IVueCase {
 
-    private PresentationCase mapres;
-    private Button lebutton;
+    private final PresentationCase mapres;
+    private final Button lebutton;
 
 
 
     public CaseVue(final PresentationCase pres, Button button ){
         mapres = pres;
         lebutton = button;
-        lebutton.setOnClickListener(this);
+        lebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(this.toString(), " was clicked");
+                mapres.actionTouche();
+            }
+        });
+    }
+
+    @Override
+    public Button getLebutton() {
+        return lebutton;
     }
 
     @Override
@@ -28,13 +34,7 @@ public class CaseVue implements IVueCase {
         lebutton.setText(val);
     }
 
-    @Override
-    public void onClick(View v) {
-        Log.d(this.toString(), " was clicked");
-        mapres.actionTouche();
-    }
-
-    @Override
+     @Override
     public String toString() {
         return lebutton.toString();
     }

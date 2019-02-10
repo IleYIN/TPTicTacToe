@@ -13,14 +13,12 @@ public class PlateauVue implements IVuePlateau {
     public PlateauVue(final PresentationPlateau pres, Button button ){
         mapres = pres;
         lebutton = button;
-        lebutton.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        mapres.actionReset();
-//        TODO
+        lebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapres.actionReset();
+            }
+        });
     }
 
 }
