@@ -49,8 +49,8 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
         try {
             //faire intention aux ordres des trois commandes suivantes!!!
             etatCourant.touche();
-            lavue.notifiValeur(lemodel.getValChamp());
-            lavue.getLebutton().setEnabled(false);
+            lavue.notifValeur(lemodel.getValChamp());
+            lavue.notifButton(lemodel.isTouchable());
         } catch (CaseNonPermisException e) {
             e.printStackTrace();
         }
@@ -59,11 +59,15 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
     public void actionReset(){
         try {
             etatCourant.reset();
-            lavue.notifiValeur(lemodel.getValChamp());
-            lavue.getLebutton().setEnabled(true);
+            lavue.notifValeur(lemodel.getValChamp());
+            lavue.notifButton(lemodel.isTouchable());
         } catch (CaseNonPermisException e) {
             e.printStackTrace();
         }
+    }
+
+    public void actionFin(){
+        lavue.notifButton(false);
     }
 
     @Override
@@ -96,9 +100,9 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
         listObserverCase.remove(iobr);
     }
 
-    public void notifyObserver() {
+    public void notifyObserverPlateau() {
         for(IObserverOfCase observer:listObserverCase){
-            observer.updateFromCase();
+            observer.updateFromCase(this);
         }
     }
 
@@ -110,9 +114,9 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
 
     @Override
     public String updateFromPlateau() {
-        this.notifyObserver();
+        this.notifyObserverPlateau();
         if(!presPlateau.getLemodel().isReset()){
-            if(presPlateau.getLemodel().isValChamp()){
+            if(presPlateau.getLemodel().isJoueur()){
                return "O";
             } else {
                return "X";

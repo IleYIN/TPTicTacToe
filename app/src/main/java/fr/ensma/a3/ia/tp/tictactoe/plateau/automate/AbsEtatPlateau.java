@@ -13,7 +13,7 @@ public abstract class AbsEtatPlateau implements IEtatPlateau {
     }
 
     @Override
-    public void jouer() throws PlateauNonPermisException {
+    public void jouer(int ord) throws PlateauNonPermisException {
         throw new PlateauNonPermisException();
     }
 

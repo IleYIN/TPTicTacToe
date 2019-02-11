@@ -24,17 +24,17 @@ public class CaseVue implements IVueCase {
         });
     }
 
-    @Override
-    public Button getLebutton() {
-        return lebutton;
-    }
-
-    @Override
-    public void notifiValeur(String val) {
+     @Override
+    public void notifValeur(String val) {
         lebutton.setText(val);
     }
 
-     @Override
+    @Override
+    public void notifButton(final boolean touchable) {
+        lebutton.setEnabled(touchable);
+    }
+
+    @Override
     public String toString() {
         return lebutton.toString();
     }

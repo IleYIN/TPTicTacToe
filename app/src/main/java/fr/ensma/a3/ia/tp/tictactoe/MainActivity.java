@@ -3,6 +3,7 @@ package fr.ensma.a3.ia.tp.tictactoe;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     Button resetbutton;
 
+    TextView whowins;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        whowins = findViewById(R.id.whowins);
 
         button1 = findViewById(R.id.button01);
         button2 = findViewById(R.id.button02);
@@ -55,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
         listButtons.add(button9);
 
         PresentationPlateau presentationPlateau = new PresentationPlateau();
-        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton);
+        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton,whowins);
         presentationPlateau.setLavue(prespl);
 
         for(Button button:listButtons){
-            PresentationCase pres = new PresentationCase();
-            CaseVue caze = new CaseVue(pres, button);
-            pres.setLavue(caze);
-            pres.subscribePlateau(presentationPlateau);
-            presentationPlateau.subscribeCase(pres);
+            PresentationCase presCase = new PresentationCase();
+            CaseVue caze = new CaseVue(presCase, button);
+            presCase.setLavue(caze);
+            presCase.subscribePlateau(presentationPlateau);
+            presentationPlateau.subscribeCase(presCase);
         }
 
     }

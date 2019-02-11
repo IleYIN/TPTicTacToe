@@ -12,12 +12,48 @@ public class EnJeu extends AbsEtatPlateau {
     @Override
     public void reset() throws PlateauNonPermisException {
         lemodel.setReset(true);
-        lemodel.setValChamp(false);
+        lemodel.setJoueur(false);
+        lemodel.resetBoardStatus();
+        lemodel.setVal("en cour du jeu");
+        lemodel.checkButtontouchable();
         monautomate.setEtatCourant(monautomate.getEnInit());
     }
 
     @Override
-    public void jouer() throws PlateauNonPermisException {
-        lemodel.setValChamp(!lemodel.isValChamp());
+    public void jouer(int ord) throws PlateauNonPermisException {
+        lemodel.setJoueur(!lemodel.isJoueur());
+        switch(ord){
+            case 0:
+                lemodel.setBoardStatus(0,0,lemodel.isJoueur());
+                break;
+            case 1:
+                lemodel.setBoardStatus(0,1,lemodel.isJoueur());
+                break;
+            case 2:
+                lemodel.setBoardStatus(0,2,lemodel.isJoueur());
+                break;
+            case 3:
+                lemodel.setBoardStatus(1,0,lemodel.isJoueur());
+                break;
+            case 4:
+                lemodel.setBoardStatus(1,1,lemodel.isJoueur());
+                break;
+            case 5:
+                lemodel.setBoardStatus(1,2,lemodel.isJoueur());
+                break;
+            case 6:
+                lemodel.setBoardStatus(2,0,lemodel.isJoueur());
+                break;
+            case 7:
+                lemodel.setBoardStatus(2,1,lemodel.isJoueur());
+                break;
+            case 8:
+                lemodel.setBoardStatus(2,2,lemodel.isJoueur());
+                break;
+            default:
+                break;
+        }
+        lemodel.checkButtontouchable();
     }
+
 }

@@ -16,6 +16,7 @@ public class EnVide extends AbsEtatCase {
         monautomate.setEtatCourant(monautomate.getEnTouche());
         PresentationCase pc = (PresentationCase)monautomate;
         lemodel.setValChamp(pc.updateFromPlateau());
+        lemodel.setTouchable(false);
     }
 
     @Override

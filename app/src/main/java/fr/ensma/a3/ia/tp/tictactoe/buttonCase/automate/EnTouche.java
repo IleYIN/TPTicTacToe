@@ -14,5 +14,6 @@ public class EnTouche extends AbsEtatCase  {
     public void reset() throws CaseNonPermisException {
         lemodel.setValChamp("CLICK");
         monautomate.setEtatCourant(monautomate.getEnVide());
+        lemodel.setTouchable(true);
     }
 }
