@@ -1,6 +1,8 @@
 package fr.ensma.a3.ia.tp.tictactoe.plateau;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,6 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         }
     }
 
-
     @Override
     public void setEtatCourant(IEtatPlateau etatPlateau) {
         this.etatCourant = etatPlateau;
@@ -90,6 +91,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         try {
             etatCourant.jouer(this.listPresCase.indexOf(iobc));
             lavue.notifValeur(lemodel.getVal());
+            Log.d(this.toString(),"notifButton rejouer");
             lavue.notifButton(lemodel.isButtontouchable());
         } catch (PlateauNonPermisException e) {
             e.printStackTrace();
@@ -108,6 +110,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
 
     @Override
     public void notifyObserverReset() {
+        Log.d(this.toString(),"notifyObserverReset");
         for(IObserverOfPlateau iobr:listIObserverOfP){
             PresentationCase pc = (PresentationCase)iobr;
             pc.actionReset();

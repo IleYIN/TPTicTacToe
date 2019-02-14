@@ -21,6 +21,7 @@ public class EnVide extends AbsEtatCase {
 
     @Override
     public void reset() throws CaseNonPermisException {
-        //faire rien
+       lemodel.setValChamp("CLICK");
+       lemodel.setTouchable(true);
     }
 }
