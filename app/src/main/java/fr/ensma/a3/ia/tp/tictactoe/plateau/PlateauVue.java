@@ -19,6 +19,7 @@ public class PlateauVue implements IVuePlateau {
                 mapres.actionReset();
             }
         });
+        lebutton.setEnabled(false);
         leChamp = champ;
     }
 

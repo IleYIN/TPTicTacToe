@@ -21,4 +21,6 @@ public abstract class AbsEtatPlateau implements IEtatPlateau {
     public void reset() throws PlateauNonPermisException {
         throw new PlateauNonPermisException();
     }
+
+
 }

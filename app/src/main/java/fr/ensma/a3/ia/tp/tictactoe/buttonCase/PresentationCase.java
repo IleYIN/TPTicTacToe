@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.CaseNonPermisException;
+import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.EnFin;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.EnTouche;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.EnVide;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.IEtatCase;
@@ -23,6 +24,7 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
     private IEtatCase etatCourant;
     private IEtatCase etatVide;
     private IEtatCase etatEnTouche;
+    private IEtatCase etatEnFin;
 
     public PresentationCase(){
         listObserverCase = new ArrayList<IObserverOfCase>();
@@ -30,6 +32,7 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
         etatCourant = new EnVide(this,lemodel);
         etatVide = new EnVide(this,lemodel);
         etatEnTouche = new EnTouche(this,lemodel);
+        etatEnFin = new EnFin(this,lemodel);
     }
 
     public ModelCase getLemodel() {
@@ -67,8 +70,15 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
     }
 
     public void actionFin(){
-        lavue.notifButton(false);
+      try{
+          etatCourant.finir();
+          lavue.notifValeur(lemodel.getValChamp());
+          lavue.notifButton(lemodel.isTouchable());
+      }  catch (CaseNonPermisException e) {
+          e.printStackTrace();
+      }
     }
+
 
     @Override
     public void setEtatCourant(IEtatCase etatCase) {
@@ -88,6 +98,11 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
     @Override
     public IEtatCase getEnVide() {
         return this.etatVide;
+    }
+
+    @Override
+    public IEtatCase getEnFin() {
+        return this.etatEnFin;
     }
 
     @Override

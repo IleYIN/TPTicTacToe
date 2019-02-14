@@ -6,4 +6,5 @@ public interface IGestionEtatCase {
     public IEtatCase getEtatCourant();
     public IEtatCase getEnTouche();
     public IEtatCase getEnVide();
+    public IEtatCase getEnFin();
 }

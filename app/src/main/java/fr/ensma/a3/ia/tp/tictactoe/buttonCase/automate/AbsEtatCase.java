@@ -22,4 +22,9 @@ public abstract class AbsEtatCase implements IEtatCase{
     public void reset() throws CaseNonPermisException {
         throw new CaseNonPermisException();
     }
+
+    @Override
+    public void finir() throws CaseNonPermisException  {
+        throw new CaseNonPermisException();
+    }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.IObservableCase;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.IObserverOfPlateau;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.PresentationCase;
+import fr.ensma.a3.ia.tp.tictactoe.buttonCase.automate.IEtatCase;
+import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.EnFinJeu;
 import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.EnInit;
 import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.EnJeu;
 import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.IEtatPlateau;
@@ -16,6 +18,7 @@ import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.IGestionEtatPlateau;
 import fr.ensma.a3.ia.tp.tictactoe.plateau.automate.PlateauNonPermisException;
 
 public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase,IObservablePlateau {
+
 
     private List<IObservableCase> listPresCase;
     private List<IObserverOfPlateau> listIObserverOfP;
@@ -26,6 +29,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     private IEtatPlateau etatCourant;
     private IEtatPlateau etatInit;
     private IEtatPlateau etatEnJeu;
+    private IEtatPlateau etatEnFinJeu;
 
     public PresentationPlateau() {
         listPresCase = new ArrayList<IObservableCase>();
@@ -34,6 +38,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         etatCourant = new EnInit(this,lemodel);
         etatInit= new EnInit(this,lemodel);
         etatEnJeu = new EnJeu(this,lemodel);
+        etatEnFinJeu = new EnFinJeu(this, lemodel);
     }
 
     public IVuePlateau getLavue() {
@@ -81,6 +86,11 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     }
 
     @Override
+    public IEtatPlateau getEnFinJeu() {
+        return etatEnFinJeu;
+    }
+
+    @Override
     public void subscribeCase(IObservableCase iobc) {
         listPresCase.add(iobc);
         iobc.addObserver(this);
@@ -89,6 +99,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     @Override
     public void updateFromCase(IObservableCase iobc)  {
         try {
+//            Log.d(this.toString(),etatCourant.equals(etatEnFinJeu)?"true":"false");
             etatCourant.jouer(this.listPresCase.indexOf(iobc));
             lavue.notifValeur(lemodel.getVal());
             Log.d(this.toString(),"notifButton rejouer");
@@ -117,8 +128,10 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         }
     }
 
+
     @Override
     public void notifyObserverFin() {
+        if(lemodel.isButtontouchable())
         for(IObserverOfPlateau iobr:listIObserverOfP){
             PresentationCase pc = (PresentationCase)iobr;
             pc.actionFin();

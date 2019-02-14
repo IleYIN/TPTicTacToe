@@ -1,6 +1,7 @@
 package fr.ensma.a3.ia.tp.tictactoe.plateau.automate;
 
 import fr.ensma.a3.ia.tp.tictactoe.plateau.ModelPlateau;
+import fr.ensma.a3.ia.tp.tictactoe.plateau.PresentationPlateau;
 
 public class EnInit extends AbsEtatPlateau {
 
@@ -44,13 +45,13 @@ public class EnInit extends AbsEtatPlateau {
             default:
                 break;
         }
-        lemodel.checkButtontouchable();
-    }
 
-    @Override
-    public void reset() throws PlateauNonPermisException {
-        //faire rien
+//        if(lemodel.checkWinner()){
+//            monautomate.setEtatCourant(monautomate.getEnFinJeu());
+//            lemodel.setButtontouchable(true);
+//            PresentationPlateau pr = (PresentationPlateau)monautomate;
+//            pr.notifyObserverFin();
+//        }
     }
-
 
 }

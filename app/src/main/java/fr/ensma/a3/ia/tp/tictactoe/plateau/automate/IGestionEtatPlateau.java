@@ -6,4 +6,5 @@ public interface IGestionEtatPlateau {
     public IEtatPlateau getEtatCourant();
     public IEtatPlateau getEnJeu();
     public IEtatPlateau getEnInit();
+    public IEtatPlateau getEnFinJeu();
 }

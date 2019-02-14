@@ -20,8 +20,10 @@ public class EnVide extends AbsEtatCase {
     }
 
     @Override
-    public void reset() throws CaseNonPermisException {
-       lemodel.setValChamp("CLICK");
-       lemodel.setTouchable(true);
+    public void finir() throws CaseNonPermisException  {
+        monautomate.setEtatCourant(monautomate.getEnFin());
+        lemodel.setValChamp("");
+        lemodel.setTouchable(false);
     }
+
 }
