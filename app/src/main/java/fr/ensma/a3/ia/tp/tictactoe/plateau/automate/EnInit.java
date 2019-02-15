@@ -13,11 +13,13 @@ public class EnInit extends AbsEtatPlateau {
     @Override
     public void timesup() throws PlateauNonPermisException {
        lemodel.setJoueur(!lemodel.isJoueur());
+        lemodel.setVal("en cour du jeu, tour de "+((lemodel.isJoueur())?"O":"X"));
     }
 
     @Override
     public void jouer(int ord) throws PlateauNonPermisException {
         lemodel.setReset(false);
+        lemodel.setVal("en cour du jeu, tour de "+((lemodel.isJoueur())?"X":"O"));
         monautomate.setEtatCourant(monautomate.getEnJeu());
 
         switch(ord){

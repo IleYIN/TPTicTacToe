@@ -21,13 +21,13 @@ public class PlateauVue implements IVuePlateau {
         leThTimer = new MonTimer();
         leThTimer.execute();
         laBarre.setMax(10);
-
         lebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mapres.actionReset();
             }
         });
+        lebutton.setEnabled(false);
         leChamp = champ;
     }
 

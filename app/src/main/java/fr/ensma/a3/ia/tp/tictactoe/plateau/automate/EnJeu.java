@@ -13,11 +13,13 @@ public class EnJeu extends AbsEtatPlateau {
     @Override
     public void timesup() throws PlateauNonPermisException {
         lemodel.setJoueur(!lemodel.isJoueur());
+        lemodel.setVal("en cour du jeu, tour de "+((lemodel.isJoueur())?"X":"O"));
     }
 
     @Override
     public void jouer(int ord) throws PlateauNonPermisException {
         lemodel.setJoueur(!lemodel.isJoueur());
+        lemodel.setVal("en cour du jeu, tour de "+((lemodel.isJoueur())?"X":"O"));
         switch(ord){
             case 0:
                 lemodel.setBoardStatus(0,0,lemodel.isJoueur());

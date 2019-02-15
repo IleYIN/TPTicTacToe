@@ -14,7 +14,7 @@ public class EnFinJeu extends AbsEtatPlateau {
         lemodel.setReset(true);
         lemodel.setJoueur(false);
         lemodel.resetBoardStatus();
-        lemodel.setVal("en cour du jeu");
+        lemodel.setVal("en cour du jeu, tour de X");
         lemodel.setButtontouchable(false);
 
     }

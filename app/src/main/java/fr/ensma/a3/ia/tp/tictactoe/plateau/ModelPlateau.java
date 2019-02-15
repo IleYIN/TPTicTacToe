@@ -15,7 +15,7 @@ public class ModelPlateau {
         this.joueur = false;//false = 'X', true = 'O'
         this.reset = false;
         this.buttontouchable = false;
-        this.val = "en cour du jeu";
+        this.val = "en cour du jeu, tour de "+((this.isJoueur())?"O":"X");
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 boardStatus[i][j] = -1;

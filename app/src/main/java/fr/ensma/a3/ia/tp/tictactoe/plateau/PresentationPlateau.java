@@ -66,6 +66,8 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         try {
             etatCourant.timesup();
             lavue.notifTimerFin();
+            lavue.notifValeur(lemodel.getVal());
+            lavue.createTimer();
         } catch (PlateauNonPermisException e) {
         e.printStackTrace();
     }
