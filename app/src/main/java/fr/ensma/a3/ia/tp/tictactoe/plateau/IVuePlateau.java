@@ -5,4 +5,6 @@ import android.view.View;
 public interface IVuePlateau {
     public void notifValeur(final String val);
     public void notifButton(final boolean touchable);
+    public void notifTimerFin();
+    public void createTimer();
 }

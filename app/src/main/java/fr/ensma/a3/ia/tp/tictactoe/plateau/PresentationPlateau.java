@@ -41,10 +41,6 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
         etatEnFinJeu = new EnFinJeu(this, lemodel);
     }
 
-    public IVuePlateau getLavue() {
-        return lavue;
-    }
-
     public void setLavue(IVuePlateau lavue) {
         this.lavue = lavue;
     }
@@ -57,12 +53,22 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     public void actionReset() {
         try {
             etatCourant.reset();
+            lavue.createTimer();
             lavue.notifValeur(lemodel.getVal());
             this.notifyObserverReset();
             lavue.notifButton(lemodel.isButtontouchable());
         } catch (PlateauNonPermisException e) {
             e.printStackTrace();
         }
+    }
+
+    public void actionTimesUp(){
+        try {
+            etatCourant.timesup();
+            lavue.notifTimerFin();
+        } catch (PlateauNonPermisException e) {
+        e.printStackTrace();
+    }
     }
 
     @Override
@@ -99,10 +105,13 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     @Override
     public void updateFromCase(IObservableCase iobc)  {
         try {
-//            Log.d(this.toString(),etatCourant.equals(etatEnFinJeu)?"true":"false");
             etatCourant.jouer(this.listPresCase.indexOf(iobc));
+            lavue.notifTimerFin();
+            if(!etatCourant.equals(etatEnFinJeu)){
+                lavue.createTimer();
+            }
             lavue.notifValeur(lemodel.getVal());
-            Log.d(this.toString(),"notifButton rejouer");
+//            Log.d(this.toString(),"notifButton rejouer");
             lavue.notifButton(lemodel.isButtontouchable());
         } catch (PlateauNonPermisException e) {
             e.printStackTrace();
@@ -131,10 +140,10 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
 
     @Override
     public void notifyObserverFin() {
-        if(lemodel.isButtontouchable())
         for(IObserverOfPlateau iobr:listIObserverOfP){
             PresentationCase pc = (PresentationCase)iobr;
             pc.actionFin();
         }
+        lavue.notifTimerFin();
     }
 }

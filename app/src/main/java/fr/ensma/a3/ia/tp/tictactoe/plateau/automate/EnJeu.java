@@ -10,7 +10,10 @@ public class EnJeu extends AbsEtatPlateau {
         super(monautomate, lemodel);
     }
 
-
+    @Override
+    public void timesup() throws PlateauNonPermisException {
+        lemodel.setJoueur(!lemodel.isJoueur());
+    }
 
     @Override
     public void jouer(int ord) throws PlateauNonPermisException {

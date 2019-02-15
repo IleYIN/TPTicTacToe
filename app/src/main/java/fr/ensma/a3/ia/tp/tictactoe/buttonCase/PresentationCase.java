@@ -35,15 +35,6 @@ public class PresentationCase implements IGestionEtatCase, IObservableCase, IObs
         etatEnFin = new EnFin(this,lemodel);
     }
 
-    public ModelCase getLemodel() {
-        return lemodel;
-    }
-
-
-    public IVueCase getLavue() {
-        return lavue;
-    }
-
     public void setLavue(IVueCase lavue) {
         this.lavue = lavue;
     }

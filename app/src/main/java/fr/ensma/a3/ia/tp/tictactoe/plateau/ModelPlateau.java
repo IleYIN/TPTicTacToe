@@ -71,8 +71,6 @@ public class ModelPlateau {
 
     public boolean checkWinner(){
 
-        Log.d(this.toString(), "Inside checkWinner");
-
         //Horizontal --- rows
         for(int i=0; i<3; i++){
             if(boardStatus[i][0] != -1 && boardStatus[i][0] == boardStatus[i][1] && boardStatus[i][0] == boardStatus[i][2] ){

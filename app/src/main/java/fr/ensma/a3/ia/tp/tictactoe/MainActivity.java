@@ -1,8 +1,10 @@
 package fr.ensma.a3.ia.tp.tictactoe;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,21 +17,22 @@ import fr.ensma.a3.ia.tp.tictactoe.plateau.PresentationPlateau;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button1;
-    Button button2;
-    Button button3;
-    Button button4;
-    Button button5;
-    Button button6;
-    Button button7;
-    Button button8;
-    Button button9;
+    private Button button1;
+    private Button button2;
+    private Button button3;
+    private Button button4;
+    private Button button5;
+    private Button button6;
+    private Button button7;
+    private Button button8;
+    private Button button9;
+    private ProgressBar laBarre;
 
-    List<Button> listButtons = new ArrayList<Button>();
+    private  List<Button> listButtons = new ArrayList<Button>();
 
-    Button resetbutton;
+    private Button resetbutton;
 
-    TextView whowins;
+    private TextView whowins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         whowins = findViewById(R.id.whowins);
+
+        laBarre = findViewById(R.id.la_bar);
 
         button1 = findViewById(R.id.button01);
         button2 = findViewById(R.id.button02);
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         listButtons.add(button9);
 
         PresentationPlateau presentationPlateau = new PresentationPlateau();
-        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton,whowins);
+        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton,whowins,laBarre);
         presentationPlateau.setLavue(prespl);
 
         for(Button button:listButtons){
@@ -72,4 +77,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+
 }

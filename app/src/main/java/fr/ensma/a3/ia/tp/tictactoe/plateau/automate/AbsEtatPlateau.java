@@ -22,5 +22,8 @@ public abstract class AbsEtatPlateau implements IEtatPlateau {
         throw new PlateauNonPermisException();
     }
 
-
-}
+    @Override
+    public void timesup() throws PlateauNonPermisException {
+        throw new PlateauNonPermisException();
+    }
+ }

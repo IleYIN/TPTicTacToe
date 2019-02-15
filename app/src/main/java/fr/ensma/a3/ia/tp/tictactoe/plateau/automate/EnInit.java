@@ -11,9 +11,15 @@ public class EnInit extends AbsEtatPlateau {
     }
 
     @Override
+    public void timesup() throws PlateauNonPermisException {
+       lemodel.setJoueur(!lemodel.isJoueur());
+    }
+
+    @Override
     public void jouer(int ord) throws PlateauNonPermisException {
         lemodel.setReset(false);
         monautomate.setEtatCourant(monautomate.getEnJeu());
+
         switch(ord){
             case 0:
                 lemodel.setBoardStatus(0,0,lemodel.isJoueur());
