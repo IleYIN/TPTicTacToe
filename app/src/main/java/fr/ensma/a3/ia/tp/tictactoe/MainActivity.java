@@ -1,5 +1,6 @@
 package fr.ensma.a3.ia.tp.tictactoe;
 
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ensma.a3.ia.tp.tictactoe.accel.AcquAccel;
+import fr.ensma.a3.ia.tp.tictactoe.accel.MDDAccel;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.CaseVue;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.PresentationCase;
 import fr.ensma.a3.ia.tp.tictactoe.plateau.PlateauVue;
@@ -34,10 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView whowins;
 
+    private TextView textAccel;
+    private SensorManager sensM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textAccel = findViewById(R.id.text_accel);
+        sensM = (SensorManager)getSystemService(SENSOR_SERVICE);
 
         whowins = findViewById(R.id.whowins);
 
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         listButtons.add(button9);
 
         PresentationPlateau presentationPlateau = new PresentationPlateau();
-        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton,whowins,laBarre);
+        PlateauVue prespl = new PlateauVue(presentationPlateau,resetbutton,whowins,laBarre, textAccel, sensM);
         presentationPlateau.setLavue(prespl);
 
         for(Button button:listButtons){
@@ -77,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 

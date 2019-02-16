@@ -197,6 +197,17 @@
         app:layout_constraintTop_toBottomOf="@+id/le_tableLayout" />
     />
 
+
+    <TextView
+        android:id="@+id/text_accel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button10"
+        android:text="TextView" />
+
     <ProgressBar
         android:id="@+id/la_bar"
         style="?android:attr/progressBarStyleHorizontal"

@@ -1,20 +1,33 @@
 package fr.ensma.a3.ia.tp.tictactoe.plateau;
 
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import fr.ensma.a3.ia.tp.tictactoe.MainActivity;
+import fr.ensma.a3.ia.tp.tictactoe.accel.AcquAccel;
+import fr.ensma.a3.ia.tp.tictactoe.accel.MDDAccel;
+
 public class PlateauVue implements IVuePlateau {
 
     private PresentationPlateau mapres;
     private Button lebutton;
     private TextView leChamp;
+
     private ProgressBar laBarre;
     private MonTimer leThTimer;
 
-    public PlateauVue(final PresentationPlateau pres, Button button, TextView champ, ProgressBar bar ){
+    private TextView textAccel;
+    private SensorManager sensM;
+    private MDDAccel mddAccelVal;
+
+
+
+    public PlateauVue(final PresentationPlateau pres, Button button, TextView champ, ProgressBar bar,
+                      TextView textAc, SensorManager sen ){
         mapres = pres;
         lebutton = button;
         laBarre = bar;
@@ -29,6 +42,15 @@ public class PlateauVue implements IVuePlateau {
         });
         lebutton.setEnabled(false);
         leChamp = champ;
+
+        textAccel = textAc;
+        sensM = sen;
+        mddAccelVal = new MDDAccel();
+
+        new MonAcqAccel().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        AcquAccel thAcell = new AcquAccel(sensM,mddAccelVal);
+        thAcell.start();
+
     }
 
     @Override
@@ -87,4 +109,36 @@ public class PlateauVue implements IVuePlateau {
 
         }
     }
+
+    private class MonAcqAccel extends AsyncTask<Void,Float,Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            float xval;
+            while(true) {
+
+                try {
+                    Thread.currentThread().sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                xval = mddAccelVal.getXVal();
+                publishProgress(xval);
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Float... values) {
+            textAccel.setText(values[0].toString());
+
+            if(values[0]>6.0||values[0]<-6){
+                mapres.setEtatCourant(mapres.getEnFinJeu());
+                mapres.notifyObserverFin();
+                mapres.actionReset();
+            }
+        }
+    }
+
+
 }

@@ -1,11 +1,14 @@
 package fr.ensma.a3.ia.tp.tictactoe.plateau;
 
 
+import android.hardware.SensorManager;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ensma.a3.ia.tp.tictactoe.accel.MDDAccel;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.IObservableCase;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.IObserverOfPlateau;
 import fr.ensma.a3.ia.tp.tictactoe.buttonCase.PresentationCase;
@@ -30,6 +33,7 @@ public class PresentationPlateau implements IGestionEtatPlateau, IObserverOfCase
     private IEtatPlateau etatInit;
     private IEtatPlateau etatEnJeu;
     private IEtatPlateau etatEnFinJeu;
+
 
     public PresentationPlateau() {
         listPresCase = new ArrayList<IObservableCase>();
